@@ -180,12 +180,19 @@ export default function Home(props: any) {
 }
 
 export async function getServerSideProps() {
+  try{
   const res = await fetch("http://localhost:3000/api/getAllPageNames.api");
   const data = await res.json();
-
   return {
     props: {
       pages: data,
     },
   };
+  }catch (err) {
+    console.error(err);
+    return { props: { error: 'An error occurred' } };
+  }
+
+
+
 }
