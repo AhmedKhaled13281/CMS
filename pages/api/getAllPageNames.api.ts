@@ -10,7 +10,7 @@ export default async function handler(
   if (req.method === "POST") {
     const slug = req.body?.toLowerCase().split(" ").join("-");
 
-    const day = new Date().getDay();
+    const day = new Date().getDay() + 1;
     const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear();
 
