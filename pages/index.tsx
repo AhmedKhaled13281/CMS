@@ -17,7 +17,7 @@ export default function Home(props: any) {
   const [reqStatus, setReqStatus] = useState<Boolean>(false);
   const [filteredData, setFilteredData] = useState(pagesList);
   const [term, setTerm] = useState<string>("");
-
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [active, setActive] = useState(1);
 
   const handleSubmit = async (value: any) => {
@@ -66,6 +66,7 @@ export default function Home(props: any) {
         setPagesList(data);
         setReqStatus(false);
         setFilteredData(data);
+        setIsLoading(false);
         console.log(pagesList);
       } catch (error) {
         console.log("Error Message : ", error);
@@ -159,16 +160,28 @@ export default function Home(props: any) {
                 />
               </div>
             </div>
-            <TableData
-              tableData={filteredData}
-              handleDeletePage={handleDeletePage}
-            />
+            {isLoading ? (
+              <p aria-hidden="true" className="placeholder-glow">
+                <span className="placeholder col-12 bg-secondary"></span>
+                <span className="placeholder col-12 bg-secondary"></span>
+                <span className="placeholder col-12 bg-secondary"></span>
+                <span className="placeholder col-12 bg-secondary"></span>
+                <span className="placeholder col-12 bg-secondary"></span>
+                <span className="placeholder col-12 bg-secondary"></span>
+              </p>
+            ) : (
+              <TableData
+                tableData={filteredData}
+                handleDeletePage={handleDeletePage}
+              />
+            )}
           </div>
         </div>
         <div className="container d-flex justify-content-between align-items-center">
           <p className="text-secondary">
             Showing {end} of {pagesList.length}
           </p>
+
           <Pagination className="mt-3 d-flex justify-content-end">
             <Pagination.Prev onClick={() => prevButton()} />
             <Pagination.Next onClick={() => nextButton()} />
@@ -180,19 +193,16 @@ export default function Home(props: any) {
 }
 
 export async function getServerSideProps() {
-  try{
-  const res = await fetch("http://localhost:3000/api/getAllPageNames.api");
-  const data = await res.json();
-  return {
-    props: {
-      pages: data,
-    },
-  };
-  }catch (err) {
+  try {
+    const res = await fetch("http://localhost:3000/api/getAllPageNames.api");
+    const data = await res.json();
+    return {
+      props: {
+        pages: data,
+      },
+    };
+  } catch (err) {
     console.error(err);
-    return { props: { error: 'An error occurred' } };
+    return { props: { error: "An error occurred" } };
   }
-
-
-
 }
