@@ -80,13 +80,13 @@ export default function Home(props: any) {
     setTerm(termValue);
   };
 
+  let newResults = [];
   useEffect(() => {
     if (term.length != 0) {
       pagesList?.forEach((data: any) => {
-        if (data.name.toLowerCase() === term.toLowerCase()) {
-          let newArr = [];
-          newArr.push(data);
-          setFilteredData(newArr);
+        if (data.name.trim().toLowerCase().includes(term.trim().toLowerCase())) {
+          newResults.push(data);
+          setFilteredData(newResults);
           return data;
         }
       });
