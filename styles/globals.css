@@ -74,7 +74,12 @@ body {
   background-color: black;
 }
 /* ===================================================================== */
-.gjs-block h1 {
+
+.custom-panel-content {
+
+}
+
+/* .gjs-block h1 {
   font-size: 2rem;
   color: #333;
 }
@@ -88,7 +93,7 @@ body {
   color: red !important;
   text-decoration: none;
   background-color: red !important;
-}
+} */
 
 [data-gjs-type="cell"] {
   background-color: red;

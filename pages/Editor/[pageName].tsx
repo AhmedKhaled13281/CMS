@@ -6,6 +6,7 @@ import { test } from "@/Utils/test";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import { uploadImage } from "@/Utils/fireBaseStorage";
 import { createCustomComponent } from "@/Utils/grapesComponents";
+import TestComp from "@/Components/TestComp";
 
 const PageEditor = () => {
   const [testEditor, setTestEditor] = useState<any>();
@@ -48,7 +49,24 @@ const PageEditor = () => {
       editor.on('asset:upload:end', onDrop);
 
       const i18n = editor.I18n;
-      
+      // const getElementByTextContent = (tag:any, text:any) => {
+      //   const elements = document.querySelectorAll(tag);
+      //   return Array.from(elements).find(element => element.textContent.trim() === text);
+      // }
+      // editor.on('load', () => {
+      //   // Example: Insert custom HTML into the top panel
+      //   const panelTopEl = getElementByTextContent('div' , 'Saved Sections');
+      //   if (panelTopEl) {
+      //     const customContent = document.createElement('div');
+      //     customContent.innerHTML = `
+      //     <div class="custom-panel-content">
+      //       <input type="text" placeholder="Search..."/>
+      //       <button>Submit</button>
+      //     </div>
+      //   `;
+      //     panelTopEl.appendChild(customContent);
+      //   }
+      // });
       // i18n?.setLocale(lang)
       // console.log(lang)
 
@@ -111,7 +129,7 @@ const PageEditor = () => {
 
   const componentMapping = (pageObj : any) => {
     let page = pageObj?.content?.pages[0]?.frames[0]?.component?.components
-    console.log(pageObj)
+    // console.log(pageObj)
     return page?.map((comp : any) => {
       return comp
     })
